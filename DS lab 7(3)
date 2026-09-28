@@ -1,0 +1,233 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "NVYqS9H8hcq-",
+        "outputId": "b4d04ed5-8706-4bdf-fc06-d46476f95262"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "Minimum value in BST is 1\n"
+          ]
+        }
+      ],
+      "source": [
+        "class Node:\n",
+        "    # Constructor to create a new node\n",
+        "    def __init__(self, key):\n",
+        "        self.data = key\n",
+        "        self.left = None\n",
+        "        self.right = None\n",
+        "\n",
+        "def insert(node, data):\n",
+        "    if node is None:\n",
+        "        return Node(data)\n",
+        "    else:\n",
+        "        if data <= node.data:\n",
+        "            node.left = insert(node.left, data)\n",
+        "        else:\n",
+        "            node.right = insert(node.right, data)\n",
+        "    return node\n",
+        "\n",
+        "def minValue(node):\n",
+        "    current = node\n",
+        "    while current.left is not None:\n",
+        "        current = current.left\n",
+        "    return current.data\n",
+        "\n",
+        "# Create the root of BST\n",
+        "root = None\n",
+        "root = insert(root, 4)\n",
+        "insert(root, 2)\n",
+        "insert(root, 1)\n",
+        "insert(root, 3)\n",
+        "insert(root, 6)\n",
+        "insert(root, 5)\n",
+        "\n",
+        "print(\"\\nMinimum value in BST is %d\" % (minValue(root)))\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "INT_MIN = -2**32\n",
+        "\n",
+        "def canRepresentBST(pre):\n",
+        "    s = []\n",
+        "    root = INT_MIN\n",
+        "    for value in pre:\n",
+        "        # If we find a node who is on left side and smaller than root, return False\n",
+        "        if value < root:\n",
+        "            return False\n",
+        "\n",
+        "        # Nodes greater than stack top means we are now on right subtree,\n",
+        "        # update root to last popped item\n",
+        "        while len(s) > 0 and s[-1] < value:\n",
+        "            root = s.pop()\n",
+        "\n",
+        "        s.append(value)\n",
+        "    return True\n",
+        "\n",
+        "pre1 = [40, 30, 35, 80, 100]\n",
+        "print(\"true\" if canRepresentBST(pre1) else \"false\")\n",
+        "\n",
+        "pre2 = [40, 30, 35, 20, 80, 100]\n",
+        "print(\"true\" if canRepresentBST(pre2) else \"false\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Eq62ubc7i83x",
+        "outputId": "3cf3cea4-77b9-42de-e7a2-d217c8c2b7bc"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "true\n",
+            "false\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class newNode:\n",
+        "def init (self, data):\n",
+        "self.data = data\n",
+        "self.left = None\n",
+        "self.right = None\n",
+        "def getCount(root, low, high):\n",
+        "if root == None:\n",
+        "return 0\n",
+        "if root.data == high and root.data == low:\n",
+        "return 1\n",
+        "if root.data <= high and root.data >= low:\n",
+        "return (1 + getCount(root.left, low, high) +\n",
+        "getCount(root.right, low, high))\n",
+        "elif root.data < low:\n",
+        "return getCount(root.right, low, high)\n",
+        "else:\n",
+        "return getCount(root.left, low, high)\n",
+        "if name == ' main ': root =\n",
+        "newNode(10) root.left\n",
+        "= newNode(5)\n",
+        "root.right = newNode(50)\n",
+        "root.left.left = newNode(1)\n",
+        "root.right.left = newNode(40)\n",
+        "root.right.right = newNode(100)\n",
+        "l = 5\n",
+        "h = 45\n",
+        "print(\"Count of nodes between [\", l, \", \", h,\"] is \",getCount(root, l, h))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 106
+        },
+        "id": "9i_P_o0JlFFm",
+        "outputId": "6c77f01a-82e4-4f60-fc6a-38b75413fe59"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndentationError",
+          "evalue": "expected an indented block after class definition on line 1 (2481291511.py, line 2)",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_739/2481291511.py\"\u001b[0;36m, line \u001b[0;32m2\u001b[0m\n\u001b[0;31m    def init (self, data):\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mIndentationError\u001b[0m\u001b[0;31m:\u001b[0m expected an indented block after class definition on line 1\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Node:\n",
+        "    def __init__(self, data):\n",
+        "        self.data = data\n",
+        "        self.left = None\n",
+        "        self.right = None\n",
+        "\n",
+        "def get_count(root, low, high):\n",
+        "    if root is None:\n",
+        "        return 0\n",
+        "\n",
+        "    # If current node is within range, include it and recurse on both subtrees\n",
+        "    if low <= root.data <= high:\n",
+        "        return 1 + get_count(root.left, low, high) + get_count(root.right, low, high)\n",
+        "\n",
+        "    # If current node is smaller than low, ignore left subtree\n",
+        "    elif root.data < low:\n",
+        "        return get_count(root.right, low, high)\n",
+        "\n",
+        "    # If current node is greater than high, ignore right subtree\n",
+        "    else:\n",
+        "        return get_count(root.left, low, high)\n",
+        "\n",
+        "if __name__ == '__main__':\n",
+        "    # Constructing the BST:\n",
+        "    #         10\n",
+        "    #        /  \\\n",
+        "    #       5    50\n",
+        "    #      /    /  \\\n",
+        "    #     1    40  100\n",
+        "    root = Node(10)\n",
+        "    root.left = Node(5)\n",
+        "    root.right = Node(50)\n",
+        "    root.left.left = Node(1)\n",
+        "    root.right.left = Node(40)\n",
+        "    root.right.right = Node(100)\n",
+        "\n",
+        "    l = 5\n",
+        "    h = 45\n",
+        "    print(f\"Count of nodes between [{l}, {h}] is {get_count(root, l, h)}\")\n",
+        ""
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "nyeN_oTUliAJ",
+        "outputId": "1c3e0ba8-1e6a-450e-fe6d-19a58cd6316e"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Count of nodes between [5, 45] is 3\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
