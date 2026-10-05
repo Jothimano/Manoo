@@ -1,0 +1,471 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "oWQBUcnhkCXC",
+        "outputId": "24b1eecd-47ba-4b99-b1e6-9f3551b89c6c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Element is present at index 3\n"
+          ]
+        }
+      ],
+      "source": [
+        "def search(arr, n, x):\n",
+        "    for i in range(0, n):\n",
+        "        if arr[i] == x:\n",
+        "            return i\n",
+        "    return -1\n",
+        "\n",
+        "\n",
+        "arr = [2, 3, 4, 10, 40]\n",
+        "x = 10\n",
+        "n = len(arr)\n",
+        "\n",
+        "result = search(arr, n, x)\n",
+        "\n",
+        "if result == -1:\n",
+        "    print(\"Element is not present in array\")\n",
+        "else:\n",
+        "    print(\"Element is present at index\", result)\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def binarySearch(arr, l, r, x):\n",
+        "    if r >= l:\n",
+        "        mid = l + (r - l) // 2\n",
+        "\n",
+        "        if arr[mid] == x:\n",
+        "            return mid\n",
+        "        elif arr[mid] > x:\n",
+        "            return binarySearch(arr, l, mid - 1, x)\n",
+        "        else:\n",
+        "            return binarySearch(arr, mid + 1, r, x)\n",
+        "\n",
+        "    return -1\n",
+        "\n",
+        "\n",
+        "arr = [2, 3, 4, 10, 40]\n",
+        "x = 10\n",
+        "\n",
+        "result = binarySearch(arr, 0, len(arr) - 1, x)\n",
+        "\n",
+        "if result != -1:\n",
+        "    print(\"Element is present at index %d\" % result)\n",
+        "else:\n",
+        "    print(\"Element is not present in array\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "4q1t11azlAFb",
+        "outputId": "bd629652-adf9-4656-d021-4f1da73bb489"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Element is present at index 3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def fibMonaccianSearch(arr, x, n):\n",
+        "    fibMMm2 = 0\n",
+        "    fibMMm1 = 1\n",
+        "    fibM = fibMMm2 + fibMMm1\n",
+        "\n",
+        "    while fibM < n:\n",
+        "        fibMMm2 = fibMMm1\n",
+        "        fibMMm1 = fibM\n",
+        "        fibM = fibMMm2 + fibMMm1\n",
+        "\n",
+        "    offset = -1\n",
+        "\n",
+        "    while fibM > 1:\n",
+        "        i = min(offset + fibMMm2, n - 1)\n",
+        "\n",
+        "        if arr[i] < x:\n",
+        "            fibM = fibMMm1\n",
+        "            fibMMm1 = fibMMm2\n",
+        "            fibMMm2 = fibM - fibMMm1\n",
+        "            offset = i\n",
+        "\n",
+        "        elif arr[i] > x:\n",
+        "            fibM = fibMMm2\n",
+        "            fibMMm1 = fibMMm1 - fibMMm2\n",
+        "            fibMMm2 = fibM - fibMMm1\n",
+        "\n",
+        "        else:\n",
+        "            return i\n",
+        "\n",
+        "    if fibMMm1 and arr[offset + 1] == x:\n",
+        "        return offset + 1\n",
+        "\n",
+        "    return -1\n",
+        "\n",
+        "\n",
+        "arr = [10, 22, 35, 40, 45, 50, 80, 82, 85, 90, 100]\n",
+        "n = len(arr)\n",
+        "x = 85\n",
+        "\n",
+        "print(\"Found at index:\", fibMonaccianSearch(arr, x, n))\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "2EiuNv1Zlizw",
+        "outputId": "46a09f34-e03e-4a50-c029-42491b39869e"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Found at index: 8\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def bubbleSort(arr):\n",
+        "    n = len(arr)\n",
+        "\n",
+        "    for i in range(n):\n",
+        "        for j in range(0, n - i - 1):\n",
+        "            if arr[j] > arr[j + 1]:\n",
+        "                arr[j], arr[j + 1] = arr[j + 1], arr[j]\n",
+        "\n",
+        "\n",
+        "arr = [64, 34, 25, 12, 22, 11, 90]\n",
+        "\n",
+        "bubbleSort(arr)\n",
+        "\n",
+        "print(\"Sorted array is:\")\n",
+        "\n",
+        "for i in range(len(arr)):\n",
+        "    print(\"%d\" % arr[i])\n",
+        ""
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "m2APm3N5mVHm",
+        "outputId": "58bff138-558e-4527-f836-41ab030225df"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Sorted array is:\n",
+            "11\n",
+            "12\n",
+            "22\n",
+            "25\n",
+            "34\n",
+            "64\n",
+            "90\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def insertionSort(arr):\n",
+        "    for i in range(1, len(arr)):\n",
+        "        key = arr[i]\n",
+        "        j = i - 1\n",
+        "\n",
+        "        while j >= 0 and key < arr[j]:\n",
+        "            arr[j + 1] = arr[j]\n",
+        "            j -= 1\n",
+        "\n",
+        "        arr[j + 1] = key\n",
+        "\n",
+        "\n",
+        "arr = [12, 11, 13, 5, 6]\n",
+        "\n",
+        "insertionSort(arr)\n",
+        "\n",
+        "for i in range(len(arr)):\n",
+        "    print(\"%d\" % arr[i])\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8WzHIzpTmxA8",
+        "outputId": "fe58f00e-4e87-49d1-e675-f0256a334663"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "5\n",
+            "6\n",
+            "11\n",
+            "12\n",
+            "13\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import sys\n",
+        "A = [64, 25, 12, 22, 11]\n",
+        "for i in range(len(A)):\n",
+        "min_idx = i\n",
+        "for j in range(i+1, len(A)):\n",
+        "if A[min_idx] > A[j]:\n",
+        "min_idx = j\n",
+        "A[i], A[min_idx] = A[min_idx], A[i]\n",
+        "print (\"Sorted array\")\n",
+        "for i in range(len(A)):\n",
+        "print(\"%d\" %A[i]),"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 106
+        },
+        "id": "pRgGIu-InFNU",
+        "outputId": "f874e1fb-e0f1-4d26-fc1c-2d98363b2eaa"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndentationError",
+          "evalue": "expected an indented block after 'for' statement on line 3 (674837714.py, line 4)",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_1001/674837714.py\"\u001b[0;36m, line \u001b[0;32m4\u001b[0m\n\u001b[0;31m    min_idx = i\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mIndentationError\u001b[0m\u001b[0;31m:\u001b[0m expected an indented block after 'for' statement on line 3\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import sys\n",
+        "\n",
+        "A = [64, 25, 12, 22, 11]\n",
+        "\n",
+        "for i in range(len(A)):\n",
+        "    min_idx = i\n",
+        "\n",
+        "    for j in range(i + 1, len(A)):\n",
+        "        if A[min_idx] > A[j]:\n",
+        "            min_idx = j\n",
+        "\n",
+        "    A[i], A[min_idx] = A[min_idx], A[i]\n",
+        "\n",
+        "\n",
+        "print(\"Sorted array\")\n",
+        "\n",
+        "for i in range(len(A)):\n",
+        "    print(\"%d\" % A[i])\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "cRI6LoyNnOEn",
+        "outputId": "ebddb594-814a-4ecd-98c0-74a348d168ea"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Sorted array\n",
+            "11\n",
+            "12\n",
+            "22\n",
+            "25\n",
+            "64\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def partition(arr, low, high):\n",
+        "    i = low - 1\n",
+        "    pivot = arr[high]\n",
+        "\n",
+        "    for j in range(low, high):\n",
+        "        if arr[j] < pivot:\n",
+        "            i = i + 1\n",
+        "            arr[i], arr[j] = arr[j], arr[i]\n",
+        "\n",
+        "    arr[i + 1], arr[high] = arr[high], arr[i + 1]\n",
+        "\n",
+        "    return i + 1\n",
+        "\n",
+        "\n",
+        "def quickSort(arr, low, high):\n",
+        "    if low < high:\n",
+        "        pi = partition(arr, low, high)\n",
+        "\n",
+        "        quickSort(arr, low, pi - 1)\n",
+        "        quickSort(arr, pi + 1, high)\n",
+        "\n",
+        "\n",
+        "arr = [10, 7, 8, 9, 1, 5]\n",
+        "n = len(arr)\n",
+        "\n",
+        "quickSort(arr, 0, n - 1)\n",
+        "\n",
+        "print(\"Sorted array is:\")\n",
+        "\n",
+        "for i in range(n):\n",
+        "    print(\"%d\" % arr[i])\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "qKkexfsHny89",
+        "outputId": "0483d6af-3224-4c2f-f3d9-5e317a29939b"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Sorted array is:\n",
+            "1\n",
+            "5\n",
+            "7\n",
+            "8\n",
+            "9\n",
+            "10\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def mergeSort(arr):\n",
+        "    if len(arr) > 1:\n",
+        "        mid = len(arr) // 2\n",
+        "\n",
+        "        L = arr[:mid]\n",
+        "        R = arr[mid:]\n",
+        "\n",
+        "        mergeSort(L)\n",
+        "        mergeSort(R)\n",
+        "\n",
+        "        i = j = k = 0\n",
+        "\n",
+        "        # Merge the two sorted halves\n",
+        "        while i < len(L) and j < len(R):\n",
+        "            if L[i] < R[j]:\n",
+        "                arr[k] = L[i]\n",
+        "                i += 1\n",
+        "            else:\n",
+        "                arr[k] = R[j]\n",
+        "                j += 1\n",
+        "\n",
+        "            k += 1\n",
+        "\n",
+        "        # Copy remaining elements of L\n",
+        "        while i < len(L):\n",
+        "            arr[k] = L[i]\n",
+        "            i += 1\n",
+        "            k += 1\n",
+        "\n",
+        "        # Copy remaining elements of R\n",
+        "        while j < len(R):\n",
+        "            arr[k] = R[j]\n",
+        "            j += 1\n",
+        "            k += 1\n",
+        "\n",
+        "\n",
+        "def printList(arr):\n",
+        "    for i in range(len(arr)):\n",
+        "        print(arr[i], end=\" \")\n",
+        "    print()\n",
+        "\n",
+        "\n",
+        "if __name__ == '__main__':\n",
+        "    arr = [12, 11, 13, 5, 6, 7]\n",
+        "\n",
+        "    print(\"Given array is\")\n",
+        "    printList(arr)\n",
+        "\n",
+        "    mergeSort(arr)\n",
+        "\n",
+        "    print(\"Sorted array is:\")\n",
+        "    printList(arr)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fjxacatPoeGF",
+        "outputId": "a34ca931-7b20-41be-eeef-620d52e53944"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Given array is\n",
+            "12 11 13 5 6 7 \n",
+            "Sorted array is:\n",
+            "5 6 7 11 12 13 \n"
+          ]
+        }
+      ]
+    }
+  ]
+}
